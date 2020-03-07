@@ -31,6 +31,35 @@ const operate = function(operator, x, y){
     }
 }
 
+const doCalculations = function(operateArr){
+    console.log(operateArr[1]);
+    console.log(operateArr);
+    if (operateArr.length != 3){
+        return "Input a valid equation!";
+    }
+    switch (operateArr[1]){
+        case "+":
+            return operate("add", operateArr[0], operateArr[2]);
+            break;
+        case "-":
+            return operate("subtract", operateArr[0], operateArr[2]);
+            break;
+        case "X":
+            return operate("multiply", operateArr[0], operateArr[2]);
+            break;
+        case "/":
+            return operate("divide", operateArr[0], operateArr[2]);
+            break;
+        default:
+            return "Input a valid equation";
+            break;
+
+    }
+    
+
+}
+
+
 const click = function(x){
     alert(x);
 }
@@ -88,6 +117,11 @@ const updateDisplay = function(text){
                 display
                     .textContent
                     .slice(0,display.textContent.length - 1);
+            break;
+        case "equals":
+            alert(doCalculations(display.textContent.split(' ')));
+            display.textContent = "";
+            break;
     }
 
 
