@@ -7,39 +7,33 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Calculator</h1>
-    <h2 id = 'calcDisplay'></h2>
-    <table>
-        <tr>
-            <td><button id = "seven">7</button></td>
-            <td><button id = "eight">8</button></td>
-            <td><button id = "nine">9</button></td>
-            <td><button id = "delete">DEL</button></td>
-            <td><button id = "clear">CLR</button></td>
+    <div class="calcCont">
+        <h1 class="calcLabel">Calculator</h1>
+        <h2 id="calcDisplay" class="calcDisplay" ></h2>
+        <div class="container">
+                <button id="seven"    class=".flat-button">7</button>
+                <button id="eight"    class=".flat-button">8</button>
+                <button id="nine"     class=".flat-button">9</button>
+                <button id="delete"   class=".flat-button">DEL</button>
+                <button id="clear"    class=".flat-button">CLR</button>
+                <button id="four"     class=".flat-button">4</button>
+                <button id="five"     class=".flat-button">5</button>
+                <button id="six"      class=".flat-button">6</button>
+                <button id="multiply" class=".flat-button">X</button>
+                <button id="divide"   class=".flat-button">/</button>
+                <button id="one"      class=".flat-button">1</button>
+                <button id="two"      class=".flat-button">2</button>
+                <button id="three"    class=".flat-button">3</button>
+                <button id="add"      class=".flat-button">+</button>
+                <button id="subtract" class=".flat-button">-</button>
+                <p      id="blank1"                ></p>
+                <button id="zero"     class=".flat-button">0</button>
+                <p      id="blank2"                ></p>            
+                <p      id="blank3"                ></p>            
+                <button id="equals"   class="item lorange">=</button>
             
-        </tr>
-        <tr>
-            <td><button id = "four">4</button></td>
-            <td><button id = "five">5</button></td>
-            <td><button id = "six">6</button></td>
-            <td><button id = "multiply">X</button></td>
-            <td><button id = "divide">/</button></td>
-        </tr>
-        <tr>
-            <td><button id = "one">1</button></td>
-            <td><button id = "two">2</button></td>
-            <td><button id = "three">3</button></td>
-            <td><button id = "add">+</button></td>
-            <td><button id = "subtract">-</button></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><button id = "zero">0</button></td>
-            <td></td>
-            <td></td>
-            <td><button id = "equals">=</button></td>
-        </tr>
-    </table>
+        </div>
+    </div>
 </body>
 <script src="scripts.js"></script>
 </html>
