@@ -1,142 +1,133 @@
-const add = function(x, y){
-    return Number(x) + Number(y);
-}
-
-const subtract = function(x,y) {
-    return x - y;
-}
-
-const multiply = function(x, y){
-    return x * y;
-}
-
-const divide = function (x, y){
-    if (Number(y) == 0){
-        return "Not Possible";
+class Calculator{
+    constructor(previousTextElement, currentTextElement){
+        this.previousTextElement = previousTextElement;
+        this.currentTextElement = currentTextElement;
+        this.clear();       
     }
-    return x / y;
-}
 
-const operate = function(operator, x, y){
-    switch(operator){
-        case "divide":
-            return divide(x,y);
-        case "multiply":
-            return multiply(x,y);
-        case "add":
-            return add(x,y);
-        case "subtract":
-            return subtract(x,y);
-        default:
-            return alert("Pick valid operator");
+    clear(){
+        this.currentText = '';
+        this.previousText = '';
+        this.operation = undefined;
+    }
+    
+    delete(){
+        this.currentText = this.currentText.toString().slice
+        (0,-1);
+    }
+
+    appendNum(number){
+        if(number === '.' && this.currentText.includes('.')) 
+            return 
+        this.currentText = this.currentText.toString() + number.toString();
+    }
+
+    chooseOperation(operation){
+        if (this.currentText === '') return
+        if (this.previousText !== ''){
+            this.compute();
+        }
+        this.operation = operation; 
+        this.previousText = this.currentText
+        this.currentText = '';
+    }
+    
+    compute(){
+        let computation
+        const prev = parseFloat(this.previousText)
+        const current = parseFloat(this.currentText)
+        if (isNaN(prev) || isNaN(current)) return
         
+        switch(this.operation){
+            case '+':
+                computation = prev + current;
+                break;
+            case '-':
+                computation = prev - current;
+                break;
+            case '*':
+                computation = prev * current;
+                break;
+            case '÷':
+                computation = prev / current;
+                break;
+            default:
+                return;
+            
+         }
+         this.currentText = computation
+         this.operation = undefined
+         this.previousText = '';
+        }
 
+    getDisplayNumber(number){
+        const stringNumber = number.toString();
+        const integerDigits = parseFloat(stringNumber.split('.')[0]);
+        const decimalDigits = stringNumber.split('.')[1];
+        let integerDisplay;
+        if(isNaN(integerDigits)){
+            integerDisplay = '';
+        } else{
+            integerDisplay = integerDigits.toLocaleString('en', {
+            maximumFractionDigits: 0 });
+        }
+        if(decimalDigits != null){
+            return `${integerDisplay}.${decimalDigits}`;
+        } else {
+            return integerDisplay;
+        }
+     }
+
+    updateDisplay(){
+        this.currentTextElement.innerText = this.getDisplayNumber(this.currentText);
+        if(this.operation != null){
+            this.previousTextElement.innerText = 
+                `${this.getDisplayNumber(this.previousText)} ${this.operation}`;
+        }else{
+            this.previousTextElement.innerText = '';
+        }
+        
     }
 }
 
-const doCalculations = function(operateArr){
-    console.log(operateArr[1]);
-    console.log(operateArr);
-    if (operateArr.length != 3){
-        return "Input a valid equation!";
-    }
-    switch (operateArr[1]){
-        case "+":
-            return operate("add", operateArr[0], operateArr[2]);
-            break;
-        case "-":
-            return operate("subtract", operateArr[0], operateArr[2]);
-            break;
-        case "X":
-            return operate("multiply", operateArr[0], operateArr[2]);
-            break;
-        case "/":
-            return operate("divide", operateArr[0], operateArr[2]);
-            break;
-        default:
-            return "Input a valid equation";
-            break;
 
-    }
-    
+const numberButtons = document.querySelectorAll('[data-number]');
+const operationButtons = document.querySelectorAll(
+    '[data-operation]');
+const equalsButton = document.querySelector('[data-equals]');
+const deleteButton = document.querySelector('[data-delete]');
+const clearButton = document.querySelector('[data-clear]');
+const previousTextElement = document.querySelector('[data-previous]');
+const currentTextElement = document.querySelector('[data-current]');
 
-}
+const calculator = new Calculator(previousTextElement, currentTextElement);
 
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.appendNum(button.innerText)
+        calculator.updateDisplay();
+    })
+})
 
-const click = function(x){
-    alert(x);
-}
+operationButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        calculator.chooseOperation(button.innerText)
+        calculator.updateDisplay();
+    })
+})
 
-const updateDisplay = function(text){
-    
-    switch (text){
-        case "one":
-            display.textContent += "1";
-            break;
-        case "two":
-            display.textContent += "2";
-            break;
-        case "three":
-            display.textContent += "3";
-            break;
-        case "four":
-            display.textContent += "4";
-            break;
-        case "five":
-            display.textContent += "5";
-            break;
-        case "six":
-            display.textContent += "6";
-            break;
-        case "seven":
-            display.textContent += "7";
-            break;
-        case "eight":
-            display.textContent += "8";
-            break;
-        case "nine":
-            display.textContent += "9";
-            break;
-        case "zero":
-            display.textContent += "0";
-            break;
-        case "add":
-            display.textContent += " + ";
-            break;
-        case "subtract":
-            display.textContent += " - ";
-            break;
-        case "divide":
-            display.textContent += " / ";
-            break;
-        case "multiply":
-            display.textContent += " X ";
-            break;
-        case "clear":
-            display.textContent = "";
-            break;    
-        case "delete":
-            display.textContent = 
-                display
-                    .textContent
-                    .slice(0,display.textContent.length - 1);
-            break;
-        case "equals":
-            alert(doCalculations(display.textContent.split(' ')));
-            display.textContent = "";
-            break;
-    }
-
-
-}
-
-const buttons = document.querySelectorAll('button');
-
-buttons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-        updateDisplay(button.id);
-    }
-    );
+clearButton.addEventListener('click', () => {
+    calculator.clear();
+    calculator.updateDisplay();
 });
 
-const display = document.querySelector("#calcDisplay");
+equalsButton.addEventListener('click', () => {
+    calculator.compute();
+    calculator.updateDisplay();
+});
+
+deleteButton.addEventListener('click', () => {
+    calculator.delete();
+    calculator.updateDisplay();
+});
+
