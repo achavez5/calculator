@@ -87,3 +87,56 @@ h1{
     color: white;
     font-size: 1.5rem;
 }
+
+.light-mode{
+    background-color:white;
+    color: black;
+}
+
+.light-mode .calculator-grid > button {
+    background-color:#dfe6e9;
+    color: rgba(00, 116, 185,.75);
+    border-color: white;
+}
+
+.light-mode .calculator-grid > button:hover {
+    background-color: rgba(00, 116, 185,.75);;
+    color: #dfe6e9;
+    transform: scale(1.05);
+    transition: transform .1s;
+}
+
+.light-mode .display {
+    background-color: #232528;
+}
+
+#toggle-button{
+    border: 1px solid rgba(223, 230, 233, .75);
+    background-color: rgba(00, 116, 185,.75);
+    color: #dfe6e9;
+    cursor: pointer;
+    font-size: .75rem;
+    line-height: 40px;
+    outline: none;
+    text-align: center;
+    margin-left: 10px;
+}
+#toggle-button:hover {
+    background-color: #dfe6e9;
+    color: black;
+    transform: scale(1.05);
+    transition: transform .1s;
+}
+
+.light-mode #toggle-button {
+    background-color:#dfe6e9;
+    color: rgba(00, 116, 185,.75);
+    border-color: white;
+}
+
+.light-mode #toggle-button:hover {
+    background-color: rgba(00, 116, 185,.75);;
+    color: #dfe6e9;
+    transform: scale(1.05);
+    transition: transform .1s;
+}

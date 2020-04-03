@@ -131,3 +131,13 @@ deleteButton.addEventListener('click', () => {
     calculator.updateDisplay();
 });
 
+function toggleMode(){
+    var element = document.body;
+    element.classList.toggle("light-mode");
+}
+
+const toggleButton = document.querySelector("#toggle-button");
+
+toggleButton.addEventListener('click', () =>{
+    toggleMode();
+});
